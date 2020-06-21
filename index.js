@@ -18,6 +18,7 @@ if(!config.isProd){
 }
 
 require('./models/User');
+require('./models/Product');
 
 app
   .use(express.static(path.join(__dirname, 'public')))
