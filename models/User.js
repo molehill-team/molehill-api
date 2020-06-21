@@ -12,17 +12,17 @@ const UserSchema = new mongoose.Schema({
 
 UserSchema.plugin(uniqueValidator, {message: 'is already taken.'});
 
-UserSchema.methods.validPassword = (password) => {
+UserSchema.methods.validPassword = function(password) {
   var hash = crypto.pbkdf2Sync(password, this.salt, 10000, 512, 'sha512').toString('hex');
   return this.hash === hash;
 };
 
-UserSchema.methods.setPassword = (password) => {
+UserSchema.methods.setPassword = function(password) {
   this.salt = crypto.randomBytes(16).toString('hex');
   this.hash = crypto.pbkdf2Sync(password, this.salt, 10000, 512, 'sha512').toString('hex');
 };
 
-UserSchema.methods.generateJWT = () => {
+UserSchema.methods.generateJWT = function() {
   var today = new Date();
   var exp = new Date(today);
   exp.setDate(today.getDate() + 60);
@@ -34,7 +34,7 @@ UserSchema.methods.generateJWT = () => {
   }, secret);
 };
 
-UserSchema.methods.toAuthJSON = () => {
+UserSchema.methods.toAuthJSON = function() {
   return {
     username: this.username,
     email: this.email,

@@ -11,7 +11,7 @@ router.get('/:product_id', (req, res, _next) => {
   })
 });
 
-router.post('/', auth.required, async (req, res, next) => {
+router.post('/', auth.optional, async (req, res, next) => {
   const existing = await Product.findOne({ productId: req.body.product.productId });
   if (!existing) {
     const product = new Product(req.body.product);

@@ -20,6 +20,7 @@ if(!config.isProd){
 require('./models/User');
 require('./models/Product');
 require('./models/ProductVisit');
+require('./passport');
 
 app
   .use(express.static(path.join(__dirname, 'public')))
