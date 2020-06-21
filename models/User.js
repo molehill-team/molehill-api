@@ -29,14 +29,13 @@ UserSchema.methods.generateJWT = function() {
 
   return jwt.sign({
     id: this._id,
-    username: this.username,
+    email: this.email,
     exp: parseInt(exp.getTime() / 1000),
   }, secret);
 };
 
 UserSchema.methods.toAuthJSON = function() {
   return {
-    username: this.username,
     email: this.email,
     token: this.generateJWT(),
     bio: this.bio,
