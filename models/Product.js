@@ -5,11 +5,12 @@ const ProductSchema = new mongoose.Schema({
   'name': String,
   'source': String,
   'rawData': Object,
-  'dimensionsInMm': Object,
-  'weight': Number,
+  'dimensions_mm': Object,
+  'weight_g': Number,
   'category': String,
   'productId': {type: String, index: true, unique: true},
-  'origin': String,
+  'originLocation': String,
+  'sourceURL': String,
 }, {timestamps: true});
 
 ProductSchema.plugin(uniqueValidator, {message: 'already exists'});

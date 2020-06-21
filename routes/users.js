@@ -5,7 +5,7 @@ const User = mongoose.model('User');
 const auth = require('../middleware/auth');
 
 router.get('/', auth.required, (req, res, next) => {
-  User.findById(req.payload.id).then(function(user){
+  User.findById(req.jwt.id).then(function(user){
     if(!user){ return res.sendStatus(401); }
 
     return res.json({user: user.toAuthJSON()});
@@ -13,7 +13,7 @@ router.get('/', auth.required, (req, res, next) => {
 });
 
 router.put('/', auth.required, (req, res, next) => {
-  User.findById(req.payload.id).then(user => {
+  User.findById(req.jwt.id).then(user => {
     if(!user){ return res.sendStatus(401); }
 
     // only update fields that were actually passed...
